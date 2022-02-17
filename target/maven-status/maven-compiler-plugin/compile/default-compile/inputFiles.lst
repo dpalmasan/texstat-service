@@ -1,0 +1,6 @@
+/home/dpalma/github/texstat-service/src/main/java/com/github/dpalmasan/metrics/ReadabilityMetric.java
+/home/dpalma/github/texstat-service/src/main/java/com/github/dpalmasan/metrics/MetricLibrary.java
+/home/dpalma/github/texstat-service/src/main/java/com/github/dpalmasan/metrics/ReadabilityMetricRepository.java
+/home/dpalma/github/texstat-service/src/main/java/com/github/dpalmasan/texts/TextEntity.java
+/home/dpalma/github/texstat-service/src/main/java/com/github/dpalmasan/metrics/ReadabilityMetricController.java
+/home/dpalma/github/texstat-service/src/main/java/com/github/dpalmasan/textstatservice/TextStatServiceApplication.java

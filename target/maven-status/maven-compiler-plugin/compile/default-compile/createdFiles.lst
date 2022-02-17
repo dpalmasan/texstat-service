@@ -1,0 +1,6 @@
+com/github/dpalmasan/metrics/ReadabilityMetric.class
+com/github/dpalmasan/metrics/ReadabilityMetricRepository.class
+com/github/dpalmasan/metrics/ReadabilityMetricController.class
+com/github/dpalmasan/texts/TextEntity.class
+com/github/dpalmasan/textstatservice/TextStatServiceApplication.class
+com/github/dpalmasan/metrics/MetricLibrary.class
