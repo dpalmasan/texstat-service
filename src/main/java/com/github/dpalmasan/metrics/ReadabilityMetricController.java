@@ -15,11 +15,9 @@ public class ReadabilityMetricController {
     private static final int MAX_RANGE = 50;
     private static final int TRIALS = 5;
 
-    ReadabilityMetricController() {
-    }
-
     @PostMapping("/metrics")
     List<ReadabilityMetric> computeMetrics(@RequestBody TextEntity text) {
+
         List<ReadabilityMetric> metrics = Arrays.asList(new ReadabilityMetric[] {
                 new ReadabilityMetric(text.getId(), "D-Estimate",
                         MetricLibrary.diversityEstimate(text.getText(), MIN_RANGE, MAX_RANGE, TRIALS)),

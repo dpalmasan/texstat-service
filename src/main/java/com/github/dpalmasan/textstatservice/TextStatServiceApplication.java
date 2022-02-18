@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.github.dpalmasan.metrics")
+@ComponentScan(basePackages = "com.github.dpalmasan")
 public class TextStatServiceApplication {
 
     public static void main(String[] args) {
