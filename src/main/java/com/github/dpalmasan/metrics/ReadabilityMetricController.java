@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.github.dpalmasan.texts.TextEntity;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,9 +15,8 @@ public class ReadabilityMetricController {
     private static final int MAX_RANGE = 50;
     private static final int TRIALS = 5;
 
-    @PostMapping("/metrics")
-    List<ReadabilityMetric> computeMetrics(@RequestBody TextEntity text) {
-
+    @GetMapping("/metrics")
+    List<ReadabilityMetric> computeMetrics(TextEntity text) {
         List<ReadabilityMetric> metrics = Arrays.asList(new ReadabilityMetric[] {
                 new ReadabilityMetric(text.getId(), "D-Estimate",
                         MetricLibrary.diversityEstimate(text.getText(), MIN_RANGE, MAX_RANGE, TRIALS)),

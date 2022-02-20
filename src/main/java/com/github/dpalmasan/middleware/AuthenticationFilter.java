@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,8 +38,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
-        String token = WebUtils.getCookie(request, "access_token").getValue();
-        if (!validateAuthToken(token)) {
+        Cookie authCookie = WebUtils.getCookie(request, "access_token");
+        if (authCookie == null || !validateAuthToken(authCookie.getValue())) {
             ((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is not valid.");
             return;
         }
