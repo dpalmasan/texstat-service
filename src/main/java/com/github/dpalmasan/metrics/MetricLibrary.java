@@ -3,6 +3,7 @@ package com.github.dpalmasan.metrics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -66,5 +67,20 @@ public class MetricLibrary {
     public static double typeTokenRatio(List<String> tokens) {
         HashSet<String> uniqueTokens = new HashSet<String>(tokens);
         return (double) uniqueTokens.size() / tokens.size();
+    }
+
+    public static double averageConcreteness(String text, HashMap<String, Double> lexicon) {
+        // TODO: Add lemmatization
+        List<String> tokens = tokenize(text);
+        double avgConcreteness = 0;
+        int wordCount = 0;
+        for (String token : tokens) {
+            double concreteness = lexicon.getOrDefault(token, -1.0);
+            if (concreteness > -1) {
+                avgConcreteness += concreteness;
+                wordCount++;
+            }
+        }
+        return avgConcreteness / wordCount;
     }
 }
