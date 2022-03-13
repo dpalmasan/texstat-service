@@ -1,0 +1,17 @@
+apiVersion: v1
+description: TextStat micro-service
+name: textstat-service
+version: 0.1.0
+keywords:
+- text-analysis
+- readability
+- microservice
+- java
+- spring
+home: https://github.com/dpalmasan/texstat-service
+sources:
+- https://github.com/dpalmasan/texstat-service
+maintainers:
+- name: Diego Palma
+  url: https://github.com/dpalmasan
+engine: gotpl

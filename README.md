@@ -1,6 +1,6 @@
 # TextStat Service
 
-This service is part of the demo example on microservices patterns. This service capture text complexity metrics. It does not provide a RESTful API, but on the contrary ir provides RPC endpoints to do data processing. This processing consists on extract metircs from texts. Currently, basic matrics are implemented:
+This service is part of the demo example on microservices patterns. This service capture text complexity metrics. It does not provide a RESTful API, but on the contrary ir provides RPC endpoints to do data processing. This processing consists on extract metircs from texts. Currently, basic metrics are implemented:
 
 * Char count
 * D-Estimate (or VOCD) diversity measurement.
@@ -34,4 +34,16 @@ Finally, to start the service:
 
 ```
 docker run -p 6000:6000 dpalmasan/texstat-service
+```
+
+## Deploy to Minikube
+
+```
+helm \
+    --kube-context=minikube \
+    --create-namespace \
+    --namespace=textstat-svc \
+    upgrade --install --force --recreate-pods\
+    textstat-svc \
+    helm
 ```
