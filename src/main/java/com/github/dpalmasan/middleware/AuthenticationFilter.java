@@ -17,7 +17,7 @@ import org.springframework.web.util.WebUtils;
 
 import net.devh.boot.grpc.client.inject.GrpcClient;
 
-@Component
+// @Component
 public class AuthenticationFilter extends OncePerRequestFilter {
 
     @GrpcClient("authService")
