@@ -41,7 +41,7 @@ public class ReadabilityMetricController {
                 new ReadabilityMetric(text.getId(), "Char-Count",
                         (double) MetricLibrary.charCount(text.getText())),
 
-                new ReadabilityMetric(text.getId(), "Avgerage-Concreteness",
+                new ReadabilityMetric(text.getId(), "Average-Concreteness",
                         MetricLibrary.averageConcreteness(document, concretenessLexicon))
         });
         return metrics;
