@@ -9,6 +9,9 @@ import java.util.List;
 
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.pipeline.CoreDocument;
+
 public class MetricLibrary {
     public static int charCount(String text) {
         return text.length();
@@ -69,13 +72,11 @@ public class MetricLibrary {
         return (double) uniqueTokens.size() / tokens.size();
     }
 
-    public static double averageConcreteness(String text, HashMap<String, Double> lexicon) {
-        // TODO: Add lemmatization
-        List<String> tokens = tokenize(text);
+    public static double averageConcreteness(CoreDocument document, HashMap<String, Double> lexicon) {
         double avgConcreteness = 0;
         int wordCount = 0;
-        for (String token : tokens) {
-            double concreteness = lexicon.getOrDefault(token, -1.0);
+        for (CoreLabel token : document.tokens()) {
+            double concreteness = lexicon.getOrDefault(token.lemma(), -1.0);
             if (concreteness > -1) {
                 avgConcreteness += concreteness;
                 wordCount++;

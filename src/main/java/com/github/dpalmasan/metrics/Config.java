@@ -2,6 +2,7 @@ package com.github.dpalmasan.metrics;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
 @Configuration
 public class Config {
@@ -36,4 +39,11 @@ public class Config {
         return mapping;
     }
 
+    @Bean(name = "pipeline")
+    public StanfordCoreNLP getPipeline() {
+        Properties props = new Properties();
+        props.setProperty("annotators", "tokenize,ssplit,pos,lemma");
+        props.setProperty("coref.algorithm", "neural");
+        return new StanfordCoreNLP(props);
+    }
 }
