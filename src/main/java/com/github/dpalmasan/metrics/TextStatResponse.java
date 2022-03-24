@@ -9,16 +9,14 @@ public class TextStatResponse {
     private List<ReadabilityMetric> metrics;
     private List<String> words;
     private List<String> labels;
-    private List<String> sentenceTrees;
-    private List<String> sentenceSentiments;
+    private List<Sentence> sentences;
 
     TextStatResponse(List<ReadabilityMetric> metrics, List<String> words, List<String> labels,
-            List<String> sentenceTrees, List<String> sentenceSentiments) {
+            List<Sentence> sentences) {
         this.metrics = metrics;
         this.words = words;
         this.labels = labels;
-        this.sentenceTrees = sentenceTrees;
-        this.sentenceSentiments = sentenceSentiments;
+        this.sentences = sentences;
     }
 
     public List<ReadabilityMetric> getMetrics() {
@@ -33,11 +31,7 @@ public class TextStatResponse {
         return this.labels;
     }
 
-    public List<String> getSentenceTrees() {
-        return this.sentenceTrees;
-    }
-
-    public List<String> getSentenceSentiments() {
-        return this.sentenceSentiments;
+    public List<Sentence> getSentences() {
+        return this.sentences;
     }
 }

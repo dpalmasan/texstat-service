@@ -58,13 +58,10 @@ public class ReadabilityMetricController {
             labels.add(token.tag());
         }
 
-        List<String> sentenceTrees = new ArrayList<>();
-        List<String> sentenceSentiments = new ArrayList<>();
+        List<Sentence> sents = new ArrayList<>();
         for (CoreSentence sent : document.sentences()) {
-            Tree tree = sent.constituencyParse();
-            sentenceTrees.add(ParsingUtilities.treeToDot(tree));
-            sentenceSentiments.add(sent.sentiment());
+            sents.add(new Sentence(ParsingUtilities.treeToDot(sent.constituencyParse()), sent.sentiment()));
         }
-        return new TextStatResponse(metrics, words, labels, sentenceTrees, sentenceSentiments);
+        return new TextStatResponse(metrics, words, labels, sents);
     }
 }
