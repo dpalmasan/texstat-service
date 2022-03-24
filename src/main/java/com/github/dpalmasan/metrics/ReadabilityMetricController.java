@@ -1,5 +1,6 @@
 package com.github.dpalmasan.metrics;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.neural.rnn.RNNCoreAnnotations;
 import edu.stanford.nlp.pipeline.CoreDocument;
+import edu.stanford.nlp.pipeline.CoreSentence;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.trees.Tree;
 
 @RestController
 public class ReadabilityMetricController {
@@ -30,7 +34,7 @@ public class ReadabilityMetricController {
     private StanfordCoreNLP pipeline;
 
     @GetMapping("/metrics")
-    List<ReadabilityMetric> computeMetrics(TextEntity text) {
+    TextStatResponse computeMetrics(TextEntity text) {
 
         CoreDocument document = new CoreDocument(text.getText());
         pipeline.annotate(document);
@@ -42,8 +46,25 @@ public class ReadabilityMetricController {
                         (double) MetricLibrary.charCount(text.getText())),
 
                 new ReadabilityMetric(text.getId(), "Average-Concreteness",
-                        MetricLibrary.averageConcreteness(document, concretenessLexicon))
+                        MetricLibrary.averageConcreteness(document, concretenessLexicon)),
+                new ReadabilityMetric(text.getId(), "Pronoun-Noun-Ratio",
+                        MetricLibrary.pronounNounRatio(document))
         });
-        return metrics;
+
+        List<String> words = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+        for (CoreLabel token : document.tokens()) {
+            words.add(token.word());
+            labels.add(token.tag());
+        }
+
+        List<String> sentenceTrees = new ArrayList<>();
+        List<String> sentenceSentiments = new ArrayList<>();
+        for (CoreSentence sent : document.sentences()) {
+            Tree tree = sent.constituencyParse();
+            sentenceTrees.add(ParsingUtilities.treeToDot(tree));
+            sentenceSentiments.add(sent.sentiment());
+        }
+        return new TextStatResponse(metrics, words, labels, sentenceTrees, sentenceSentiments);
     }
 }

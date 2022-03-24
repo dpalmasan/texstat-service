@@ -42,7 +42,7 @@ public class Config {
     @Bean(name = "pipeline")
     public StanfordCoreNLP getPipeline() {
         Properties props = new Properties();
-        props.setProperty("annotators", "tokenize,ssplit,pos,lemma");
+        props.setProperty("annotators", "tokenize,ssplit,pos,lemma,parse,sentiment");
         props.setProperty("coref.algorithm", "neural");
         return new StanfordCoreNLP(props);
     }

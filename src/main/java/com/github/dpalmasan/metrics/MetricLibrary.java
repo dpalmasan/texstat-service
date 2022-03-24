@@ -84,4 +84,18 @@ public class MetricLibrary {
         }
         return avgConcreteness / wordCount;
     }
+
+    public static double pronounNounRatio(CoreDocument document) {
+        double nounCount = 0;
+        double pronounCount = 0;
+        for (CoreLabel token : document.tokens()) {
+            if (token.tag().startsWith("PRP") || token.tag().startsWith("WP")) {
+                pronounCount++;
+
+            } else if (token.tag().startsWith("NN")) {
+                nounCount++;
+            }
+        }
+        return pronounCount / nounCount;
+    }
 }
