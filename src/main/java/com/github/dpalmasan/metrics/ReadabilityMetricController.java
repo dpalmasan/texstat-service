@@ -51,17 +51,10 @@ public class ReadabilityMetricController {
                         MetricLibrary.pronounNounRatio(document))
         });
 
-        List<String> words = new ArrayList<>();
-        List<String> labels = new ArrayList<>();
-        for (CoreLabel token : document.tokens()) {
-            words.add(token.word());
-            labels.add(token.tag());
-        }
-
         List<Sentence> sents = new ArrayList<>();
         for (CoreSentence sent : document.sentences()) {
-            sents.add(new Sentence(ParsingUtilities.treeToDot(sent.constituencyParse()), sent.sentiment()));
+            sents.add(new Sentence(ParsingUtilities.treeToParseTree(sent.constituencyParse()), sent.sentiment()));
         }
-        return new TextStatResponse(metrics, words, labels, sents);
+        return new TextStatResponse(metrics, sents);
     }
 }

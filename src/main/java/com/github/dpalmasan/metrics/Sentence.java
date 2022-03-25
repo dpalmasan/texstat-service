@@ -4,10 +4,10 @@ import javax.persistence.Entity;
 
 @Entity
 public class Sentence {
-    private String tree;
+    private ParseTree tree;
     private String sentiment;
 
-    public Sentence(String tree, String sentiment) {
+    public Sentence(ParseTree tree, String sentiment) {
         this.tree = tree;
         this.sentiment = sentiment;
     }
@@ -16,7 +16,7 @@ public class Sentence {
         return this.sentiment;
     }
 
-    public String getTree() {
+    public ParseTree getTree() {
         return this.tree;
     }
 }

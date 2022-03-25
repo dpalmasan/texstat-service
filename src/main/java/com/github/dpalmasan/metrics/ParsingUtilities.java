@@ -38,4 +38,12 @@ public class ParsingUtilities {
         result += "}";
         return result;
     }
+
+    public static ParseTree treeToParseTree(Tree tree) {
+        ParseTree root = new ParseTree(tree.label().toString());
+        for (Tree child : tree.children()) {
+            root.addChildren(treeToParseTree(child));
+        }
+        return root;
+    }
 }
